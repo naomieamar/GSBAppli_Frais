@@ -1,4 +1,4 @@
-ç<?php
+<?php
 /**
  * Gestion de la connexion
  *
