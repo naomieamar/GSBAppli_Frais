@@ -8,6 +8,7 @@
  * @package   GSB
  * @author    Réseau CERTA <contact@reseaucerta.org>
  * @author    José GIL <jgil@ac-nice.fr>
+ * @author    Naomie Amar
  * @copyright 2017 Réseau CERTA
  * @license   Réseau CERTA
  * @version   GIT: <0>
@@ -57,11 +58,15 @@
               method="post" role="form">
             <div class="form-group">
                 <label for="txtDateHF">Date (jj/mm/aaaa): </label>
+                <div class="input-group">
+            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
                 <input type="text" id="txtDateHF" name="dateFrais" 
                        class="form-control" id="text">
             </div>
             <div class="form-group">
-                <label for="txtLibelleHF">Libellé</label>             
+                <label for="txtLibelleHF">Libellé</label>    
+                <div class="input-group">
+            <span class="input-group-addon"><span class="glyphicon glyphicon-pencil"></span></span>
                 <input type="text" id="txtLibelleHF" name="libelle" 
                        class="form-control" id="text">
             </div> 

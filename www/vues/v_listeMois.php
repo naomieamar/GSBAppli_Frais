@@ -8,6 +8,7 @@
  * @package   GSB
  * @author    Réseau CERTA <contact@reseaucerta.org>
  * @author    José GIL <jgil@ac-nice.fr>
+ * @author    Naomie Amar
  * @copyright 2017 Réseau CERTA
  * @license   Réseau CERTA
  * @version   GIT: <0>
@@ -20,17 +21,29 @@
         <h3>Sélectionner un mois : </h3>
     </div>
     <div class="col-md-4">
-        <form action="index.php?uc=etatFrais&action=voirEtatFrais" 
+        <form 
+            <?php
+            if ($estVisiteurConnecte){
+                ?>
+              action="index.php?uc=etatFrais&action=voirEtatFrais" 
+              <?php
+              }else{
+                  ?>
+              action="index.php?uc=validerFrais&action=voirEtatFrais"
+              <?php
+              }
+              ?>
               method="post" role="form">
             <div class="form-group">
                 <label for="lstMois" accesskey="n">Mois : </label>
                 <select id="lstMois" name="lstMois" class="form-control">
                     <?php
+                    //$LesMois=array() ;
                     foreach ($lesMois as $unMois) {
                         $mois = $unMois['mois'];
                         $numAnnee = $unMois['numAnnee'];
                         $numMois = $unMois['numMois'];
-                        if ($mois == $moisASelectionner) {
+                        if ($unMois == $moisASelectionner) {
                             ?>
                             <option selected value="<?php echo $mois ?>">
                                 <?php echo $numMois . '/' . $numAnnee ?> </option>

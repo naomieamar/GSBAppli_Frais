@@ -8,6 +8,7 @@
  * @package   GSB
  * @author    Cheri Bibi - Réseau CERTA <contact@reseaucerta.org>
  * @author    José GIL <jgil@ac-nice.fr>
+ * @author    Naomie Amar
  * @copyright 2017 Réseau CERTA
  * @license   Réseau CERTA
  * @version   GIT: <0>
@@ -19,15 +20,25 @@
  *
  * @return vrai ou faux
  */
+function estConnecte()
+{
+   return isset($_SESSION['idUtilisateur']);// est ce qu'il ya un id dans la super global session
+}
+
 function estVisiteurConnecte()
 {
-    return isset($_SESSION['idVisiteur']);
-    //isset= vrai ou faux 
+   if (estConnecte()){
+       return ($_SESSION['statut']== 'visiteur');
+   }  
 }
+
 function estComptableConnecte()
 {
-    return isset($_SESSION['idComptable']);
+   if (estConnecte()){
+       return ($_SESSION['statut']== 'comptable');
+   }  
 }
+
 
 /**
  * Enregistre dans une variable session les infos d'un visiteur
@@ -38,18 +49,13 @@ function estComptableConnecte()
  *
  * @return null
  */
-function connecter($idVisiteur, $nom, $prenom)
+function connecter($idUtilisateur, $nom, $prenom, $statut)
 {
-    $_SESSION['idVisiteur'] = $idVisiteur;
-    $_SESSION['nom'] = $nom;
-    $_SESSION['prenom'] = $prenom;
+   $_SESSION['idUtilisateur'] = $idUtilisateur;
+   $_SESSION['nom'] = $nom;
+   $_SESSION['prenom'] = $prenom;
+   $_SESSION['statut'] = $statut;
 }
-
-/**
- * Détruit la session active
- *
- * @return null
- */
 function deconnecter()
 {
     session_destroy();
@@ -258,3 +264,47 @@ function nbErreurs()
         return count($_REQUEST['erreurs']);
     }
 }
+/**
+ * Fonction qui retourne le mois précédent un mois passé en paramètre
+ *
+ * @param String $mois Contient le mois à utiliser
+ *
+ * @return String le mois d'avant
+ */
+function getMoisPrecedent($mois){
+    $numAnnee = substr($mois, 0, 4);
+    $numMois = substr($mois, 4, 2);
+    if($numMois=='01'){
+        $numMois='12';
+        $numAnnee--;
+    }
+    else{
+        $numMois--;
+    }
+     if (strlen($numMois) == 1) {//strlen=verifie le nombre de caractères. Ex:si mois=6, on va mettre 06.
+        $numMois = '0' . $numMois;
+        }
+    return $numAnnee.$numMois;
+}
+
+/**
+ * Fonction qui retourne les 12 derniers mois
+ *
+ * @param String $mois   Contient le mois à utiliser
+ * @return String        Les 12 mois d'avant
+ */
+function getLesDouzeDerniersMois($mois){
+    $lesMois= array();
+    for ($k=0;$k<=12;$k++){
+        $mois= getMoisPrecedent($mois);
+        $numAnnee = substr($mois,0,4);
+        $numMois = substr($mois,4,2);
+        $lesMois [] = array(
+            'mois'=>$mois,
+            'numMois'=> $numMois,
+            'numAnnee'=> $numAnnee
+        );
+    }
+    return $lesMois;
+}
+

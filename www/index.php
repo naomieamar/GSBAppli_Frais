@@ -26,9 +26,7 @@ session_start();
 $pdo = PdoGsb::getPdoGsb();// une variable pdo prends le resultat de la methode getpdogsb qui est dans pdogsb
 // en php une variable est precede du signe $
 
-$estConnecte = (estComptableConnecte()| estVisiteurConnecte());
-$estComptableConnecte = estComptableConnecte();
-$estVisiteurConnecte = estVisiteurConnecte();
+$estConnecte = estConnecte();
 require 'vues/v_entete.php';
 // a besoin de ce dossier mais peut se poursuivre sans 
 

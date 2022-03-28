@@ -16,6 +16,7 @@
  */
 ?>
 <!DOCTYPE html>
+
 <html>
     <head>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -24,13 +25,15 @@
         <meta name="description" content="">
         <meta name="author" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="./styles/bootstrap/bootstrap.css" rel="stylesheet">
+        <link href="./styles/bootstrap/bootstrap2.css" rel="stylesheet">
         <link href="./styles/style.css" rel="stylesheet">
     </head>
     <body>
         <div class="container">
             <?php
             $uc = filter_input(INPUT_GET, 'uc', FILTER_SANITIZE_STRING);
+            $estVisiteurConnecte = estVisiteurConnecte();
+            $estComptableConnecte = estComptableConnecte();
             if ($estVisiteurConnecte) {
                 ?>
             <div class="header">
@@ -86,21 +89,22 @@
                         </h1>
                     </div>
                     <div class="col-md-8">
-                        <ul class="nav nav-pills pull-right" role="tablist">
+                        <ul class="nav nav-pills2 pull-right" role="tablist">
                             <li <?php if (!$uc || $uc == 'accueil') { ?>class="active" <?php } ?>>
-                                <a href="index.php">
+                                <a  href="index.php"style >
                                     <span class="glyphicon glyphicon-home"></span>
                                     Accueil
                                 </a>
                             </li>
-                            <li <?php if ($uc == 'gererFrais') { ?>class="active"<?php } ?>>
-                                <a href="index.php?uc=validerFrais&action=saisirFrais">
+                            <li <?php if ($uc=='validerFrais') { ?>class="active"<?php } ?>>
+                                <a href="index.php?uc=validerFrais&action=choisirVisiteurEtMois">
                                     <span class="glyphicon glyphicon-pencil"></span>
                                     Valider la fiche de frais
                                 </a>
                             </li>
-                            <li <?php if ($uc == 'etatFrais') { ?>class="active"<?php } ?>>
-                                <a href="index.php?uc=suivrePaiement&action=selectionnerMois">
+                            <li <?php if ($uc == 'suivrePaiement') { ?>class="active"<?php } ?>>
+                                <a href="index.php?uc=suivrePaiement&action=choixFiche">
+                                    
                                     <span class="glyphicon glyphicon-list-alt"></span>
                                     Suivre le paiement de la fiche de frais
                                 </a>
